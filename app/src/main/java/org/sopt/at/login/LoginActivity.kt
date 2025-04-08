@@ -105,7 +105,7 @@ class LoginActivity : ComponentActivity() {
 
             // Title
             Text(
-                text = "TVING ID 로그인",
+                text = resources.getString(R.string.login_title),
                 fontSize = 20.sp,
                 fontWeight = FontWeight.Bold,
                 color = Color.White
@@ -117,7 +117,7 @@ class LoginActivity : ComponentActivity() {
             TextField(
                 value = idTextValue,
                 onValueChange = { idTextValue = it },
-                placeholder = { Text(text = "아이디") },
+                placeholder = { Text(text = resources.getString(R.string.login_id_placeholder)) },
                 singleLine = true,
                 shape = RoundedCornerShape(2.dp),
                 textStyle = TextStyle(
@@ -152,7 +152,7 @@ class LoginActivity : ComponentActivity() {
             TextField(
                 value = pwTextValue,
                 onValueChange = { pwTextValue = it },
-                placeholder = { Text(text = "비밀번호") },
+                placeholder = { Text(text = resources.getString(R.string.login_pw_placeholder)) },
                 singleLine = true,
                 shape = RoundedCornerShape(2.dp),
                 textStyle = TextStyle(
@@ -207,7 +207,7 @@ class LoginActivity : ComponentActivity() {
                         val intent = Intent(this@LoginActivity, MyActivity::class.java)
                         startActivity(intent)
                     } else {
-                        Toast.makeText(applicationContext, "로그인 정보가 일치하지 않습니다.", Toast.LENGTH_SHORT).show()
+                        Toast.makeText(applicationContext, resources.getString(R.string.toast_login_fail), Toast.LENGTH_SHORT).show()
                     }
                 },
                 enabled = isLoginBtnEnable,
@@ -224,7 +224,7 @@ class LoginActivity : ComponentActivity() {
                     .height(48.dp),
                 content = {
                     Text(
-                        text = "로그인하기",
+                        text = resources.getString(R.string.login_button_text),
                         fontSize = 12.sp,
                         fontWeight = FontWeight.Bold,
                     )
@@ -238,7 +238,7 @@ class LoginActivity : ComponentActivity() {
                 modifier = Modifier.fillMaxWidth()
             ) {
                 Text(
-                    text = "아이디 찾기",
+                    text = resources.getString(R.string.login_find_id_btn),
                     fontSize = 16.sp,
                     fontWeight = FontWeight.Medium,
                     color = Color.LightGray,
@@ -261,7 +261,7 @@ class LoginActivity : ComponentActivity() {
                 }
 
                 Text(
-                    text = "비밀번호 찾기",
+                    text = resources.getString(R.string.login_find_pw_btn),
                     fontSize = 16.sp,
                     fontWeight = FontWeight.Medium,
                     color = Color.LightGray,
@@ -284,7 +284,7 @@ class LoginActivity : ComponentActivity() {
                 }
 
                 Text(
-                    text = "회원가입",
+                    text = resources.getString(R.string.login_signup_btn),
                     fontSize = 16.sp,
                     fontWeight = FontWeight.Medium,
                     color = Color.LightGray,
@@ -298,8 +298,14 @@ class LoginActivity : ComponentActivity() {
 
             Spacer(modifier = Modifier.height(32.dp))
 
+            val privacyServiceFormattedText = resources.getString(
+                R.string.login_privacy_service_terms,
+                "<u>${resources.getString(R.string.login_privacy_service_terms_content_1)}</u>",
+                "<u>${resources.getString(R.string.login_privacy_service_terms_content_2)}</u>"
+            ).replace("\n", "<br>")
+
             Text(
-                text = Html.fromHtml("이 사이트는 Google reCAPTCHA로 보호되며,\n<u>Google 개인정보 처리방침</u>과 <u>서비스약관</u>이 적용됩니다.", Html.FROM_HTML_MODE_LEGACY).toAnnotatedString(),
+                text = Html.fromHtml(privacyServiceFormattedText, Html.FROM_HTML_MODE_LEGACY).toAnnotatedString(),
                 fontSize = 10.sp,
                 fontWeight = FontWeight.Medium,
                 textAlign = TextAlign.Center,

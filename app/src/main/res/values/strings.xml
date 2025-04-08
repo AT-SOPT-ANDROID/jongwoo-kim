@@ -1,3 +1,32 @@
 <resources>
     <string name="app_name">AT SOPT ANDROID</string>
+
+    <!-- LoginActivity -->
+    <string name="login_title">TVING ID 로그인</string>
+    <string name="login_id_placeholder">아이디</string>
+    <string name="login_pw_placeholder">비밀번호</string>
+    <string name="login_button_text">로그인하기</string>
+    <string name="login_find_id_btn">아이디 찾기</string>
+    <string name="login_find_pw_btn">비밀번호 찾기</string>
+    <string name="login_signup_btn">회원가입</string>
+    <string name="login_privacy_service_terms">이 사이트는 Google reCAPTCHA로 보호되며,\n %s과 %s이 적용됩니다.</string>
+    <string name="login_privacy_service_terms_content_1">Google 개인정보 처리방침</string>
+    <string name="login_privacy_service_terms_content_2">서비스약관</string>
+    <string name="toast_login_fail">로그인 정보가 일치하지 않습니다.</string>
+
+    <!-- SignUpIdScreen -->
+    <string name="signup_id_title">아이디를 입력해주세요</string>
+    <string name="signup_id_placeholder">아이디</string>
+    <string name="signup_id_condition">영문 소문자 또는 영문 소문자, 숫자 조합 6~12자리</string>
+    <string name="signup_id_next_btn">다음</string>
+    <string name="toast_signup_id_fail">아이디 생성 조건에 맞지 않습니다</string>
+
+    <!-- SignUpPwScreen -->
+    <string name="signup_pw_title">비밀번호를 입력해주세요</string>
+    <string name="signup_pw_placeholder">비밀번호</string>
+    <string name="signup_pw_condition">영문, 숫자, 특수문자(~!@#$%^&amp;*) 조합 8~15자리</string>
+    <string name="signup_pw_next_btn">다음</string>
+    <string name="toast_signup_pw_fail">비밀번호 생성 조건에 맞지 않습니다</string>
+
+
 </resources>

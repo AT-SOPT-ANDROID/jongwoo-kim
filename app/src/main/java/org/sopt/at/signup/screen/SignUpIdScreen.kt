@@ -32,6 +32,7 @@ import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
+import org.sopt.at.R
 import org.sopt.at.signup.navigation.SignUpScreenRoute
 
 @Composable
@@ -55,7 +56,7 @@ fun SignUpIdScreen(
 
         // Title
         Text(
-            text = "아이디를 입력해주세요",
+            text = context.resources.getString(R.string.signup_id_title),
             fontSize = 24.sp,
             color = Color.White,
             modifier = Modifier.align(Alignment.CenterHorizontally)
@@ -67,7 +68,7 @@ fun SignUpIdScreen(
         TextField(
             value = idTextValue,
             onValueChange = { idTextValue = it },
-            placeholder = { Text(text = "아이디") },
+            placeholder = { Text(text = context.resources.getString(R.string.signup_id_placeholder)) },
             singleLine = true,
             shape = RoundedCornerShape(2.dp),
             textStyle = TextStyle(
@@ -99,7 +100,7 @@ fun SignUpIdScreen(
         Spacer(modifier = Modifier.height(16.dp))
 
         Text(
-            text = "영문 소문자 또는 영문 소문자, 숫자 조합 6~12자리",
+            text = context.resources.getString(R.string.signup_id_condition),
             fontSize = 12.sp,
             color = Color.Gray,
         )
@@ -113,7 +114,7 @@ fun SignUpIdScreen(
                     navController.navigate(SignUpScreenRoute.SignUpPwScreen.route)
                     idCallback.invoke(idTextValue)
                 }
-                else Toast.makeText(context, "아이디 생성 조건에 맞지 않습니다.", Toast.LENGTH_SHORT).show()
+                else Toast.makeText(context, context.resources.getString(R.string.toast_signup_id_fail), Toast.LENGTH_SHORT).show()
             },
             enabled = isNextBtnEnable,
             shape = RoundedCornerShape(2.dp),
@@ -130,7 +131,7 @@ fun SignUpIdScreen(
                 .border(1.dp, Color.Gray),
             content = {
                 Text(
-                    text = "다음",
+                    text = context.resources.getString(R.string.signup_id_next_btn),
                     fontSize = 16.sp,
                     fontWeight = FontWeight.Bold,
                 )

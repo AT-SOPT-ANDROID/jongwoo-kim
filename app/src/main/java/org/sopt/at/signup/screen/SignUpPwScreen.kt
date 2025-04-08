@@ -64,7 +64,7 @@ fun SignUpPwScreen(
 
         // Title
         Text(
-            text = "비밀번호를 입력해주세요",
+            text = context.resources.getString(R.string.signup_pw_title),
             fontSize = 24.sp,
             color = Color.White,
             modifier = Modifier.align(Alignment.CenterHorizontally)
@@ -76,7 +76,7 @@ fun SignUpPwScreen(
         TextField(
             value = pwTextValue,
             onValueChange = { pwTextValue = it },
-            placeholder = { Text(text = "비밀번호") },
+            placeholder = { Text(text = context.resources.getString(R.string.signup_pw_placeholder)) },
             singleLine = true,
             shape = RoundedCornerShape(2.dp),
             textStyle = TextStyle(
@@ -125,7 +125,7 @@ fun SignUpPwScreen(
         Spacer(modifier = Modifier.height(16.dp))
 
         Text(
-            text = "영문, 숫자, 특수문자(~!@#$%^&*) 조합 8~15자리",
+            text = context.resources.getString(R.string.signup_pw_condition),
             fontSize = 12.sp,
             color = Color.Gray,
         )
@@ -139,7 +139,7 @@ fun SignUpPwScreen(
                     navController.navigate(SignUpScreenRoute.SignUpPwScreen.route)
                     pwCallback.invoke(pwTextValue)
                 }
-                else Toast.makeText(context, "아이디 생성 조건에 맞지 않습니다.", Toast.LENGTH_SHORT).show()
+                else Toast.makeText(context, context.resources.getString(R.string.toast_signup_pw_fail), Toast.LENGTH_SHORT).show()
             },
             enabled = isNextBtnEnable,
             shape = RoundedCornerShape(2.dp),
@@ -156,7 +156,7 @@ fun SignUpPwScreen(
                 .border(1.dp, Color.Gray),
             content = {
                 Text(
-                    text = "다음",
+                    text = context.resources.getString(R.string.signup_pw_next_btn),
                     fontSize = 16.sp,
                     fontWeight = FontWeight.Bold,
                 )
