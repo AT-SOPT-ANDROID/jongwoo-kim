@@ -3,12 +3,13 @@ package org.sopt.at.login
 import android.content.Intent
 import android.os.Bundle
 import android.text.Html
+import android.util.Log
+import android.widget.Toast
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.activity.result.ActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
-import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -20,7 +21,6 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.layout.statusBarsPadding
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.KeyboardActions
@@ -54,8 +54,10 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import org.sopt.at.R
+import org.sopt.at.my.MyActivity
 import org.sopt.at.signup.SignUpActivity
 import org.sopt.at.ui.theme.HeaderLayout
+import org.sopt.at.util.MyApplication.Companion.prefs
 import org.sopt.at.util.noRippleClickable
 import org.sopt.at.util.toAnnotatedString
 
@@ -65,7 +67,9 @@ class LoginActivity : ComponentActivity() {
         enableEdgeToEdge()
 
         setContent {
-            Scaffold(modifier = Modifier.fillMaxSize().background(Color.Black),
+            Scaffold(modifier = Modifier
+                .fillMaxSize()
+                .background(Color.Black),
                 topBar = {
                     HeaderLayout(backBtnCallback = { finish() })
                 }, content = { innerPadding ->
@@ -81,7 +85,7 @@ class LoginActivity : ComponentActivity() {
     fun ContentLayout() {
         var idTextValue by remember { mutableStateOf("") }
         var pwTextValue by remember { mutableStateOf("") }
-        var isLoginBtnAvailable by remember { mutableStateOf(false) }
+        var isLoginBtnEnable by remember { mutableStateOf(false) }
         var shouldShowPassword by remember { mutableStateOf(false) }
 
         val localFocusManager = LocalFocusManager.current
@@ -90,7 +94,7 @@ class LoginActivity : ComponentActivity() {
             onDone = { localFocusManager.clearFocus() }
         )
 
-        isLoginBtnAvailable = idTextValue.isNotEmpty() && pwTextValue.isNotEmpty()
+        isLoginBtnEnable = idTextValue.isNotEmpty() && pwTextValue.isNotEmpty()
 
         Column(
             modifier = Modifier
@@ -115,6 +119,7 @@ class LoginActivity : ComponentActivity() {
                 onValueChange = { idTextValue = it },
                 placeholder = { Text(text = "아이디") },
                 singleLine = true,
+                shape = RoundedCornerShape(2.dp),
                 textStyle = TextStyle(
                     color = Color.LightGray,
                     fontSize = 16.sp,
@@ -149,6 +154,7 @@ class LoginActivity : ComponentActivity() {
                 onValueChange = { pwTextValue = it },
                 placeholder = { Text(text = "비밀번호") },
                 singleLine = true,
+                shape = RoundedCornerShape(2.dp),
                 textStyle = TextStyle(
                     color = Color.LightGray,
                     fontSize = 16.sp,
@@ -174,10 +180,11 @@ class LoginActivity : ComponentActivity() {
                         onClick = {
                             shouldShowPassword = !shouldShowPassword
                         },
-                        modifier = Modifier.size(12.dp)
+                        modifier = Modifier.size(24.dp)
                     ) {
                         Icon(
                             painter = painterResource(id = if(shouldShowPassword) R.drawable.icon_eye_open else R.drawable.icon_eye_close),
+                            tint = Color.White,
                             contentDescription = "Password Toggle"
                         )
                     }
@@ -196,10 +203,15 @@ class LoginActivity : ComponentActivity() {
             // Login Button
             Button(
                 onClick = {
-
+                    if(idTextValue == prefs.getData("ID") && pwTextValue == prefs.getData("PW")) {
+                        val intent = Intent(this@LoginActivity, MyActivity::class.java)
+                        startActivity(intent)
+                    } else {
+                        Toast.makeText(applicationContext, "로그인 정보가 일치하지 않습니다.", Toast.LENGTH_SHORT).show()
+                    }
                 },
-                enabled = isLoginBtnAvailable,
-                shape = RoundedCornerShape(8.dp),
+                enabled = isLoginBtnEnable,
+                shape = RoundedCornerShape(2.dp),
                 colors = ButtonDefaults.textButtonColors(
                     containerColor = Color.Cyan,
                     disabledContainerColor = Color.Gray,
@@ -304,8 +316,10 @@ class LoginActivity : ComponentActivity() {
                 val id = data?.getStringExtra("ID") ?: ""
                 val pw = data?.getStringExtra("PW") ?: ""
 
+                Log.d("Logd", "id = $id pw = $pw")
 
-
+                prefs.setData("ID", id)
+                prefs.setData("PW", pw)
             }
         }
 
