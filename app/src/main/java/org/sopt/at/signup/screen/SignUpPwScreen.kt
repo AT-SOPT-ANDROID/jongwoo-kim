@@ -136,7 +136,6 @@ fun SignUpPwScreen(
         Button(
             onClick = {
                 if(isPwValid(pwTextValue)) {
-                    navController.navigate(SignUpScreenRoute.SignUpPwScreen.route)
                     pwCallback.invoke(pwTextValue)
                 }
                 else Toast.makeText(context, context.resources.getString(R.string.toast_signup_pw_fail), Toast.LENGTH_SHORT).show()

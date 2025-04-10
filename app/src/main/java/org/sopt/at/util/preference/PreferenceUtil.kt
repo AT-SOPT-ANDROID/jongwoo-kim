@@ -11,4 +11,8 @@ class PreferenceUtil(context: Context) {
     fun getData(key: String): String? = prefs.getString(key, "")
 
     fun setData(key: String, value: String) = prefs.edit().putString(key, value).commit()
+
+    fun clearAll() {
+        prefs.edit().clear().apply()
+    }
 }

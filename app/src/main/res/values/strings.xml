@@ -1,6 +1,9 @@
 <resources>
     <string name="app_name">AT SOPT ANDROID</string>
 
+    <!-- SplashActivity -->
+    <string name="splash_title">TVING</string>
+    
     <!-- LoginActivity -->
     <string name="login_title">TVING ID 로그인</string>
     <string name="login_id_placeholder">아이디</string>
@@ -27,6 +30,9 @@
     <string name="signup_pw_condition">영문, 숫자, 특수문자(~!@#$%^&amp;*) 조합 8~15자리</string>
     <string name="signup_pw_next_btn">다음</string>
     <string name="toast_signup_pw_fail">비밀번호 생성 조건에 맞지 않습니다</string>
+
+    <!-- MyActivity -->
+    <string name="my_logout_btn">로그아웃</string>
 
 
 </resources>
