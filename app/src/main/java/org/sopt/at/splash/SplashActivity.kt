@@ -23,6 +23,7 @@ import androidx.compose.ui.unit.sp
 import org.sopt.at.R
 import org.sopt.at.login.LoginActivity
 import org.sopt.at.my.MyActivity
+import org.sopt.at.util.MyApplication.Companion.PREFS_ID_KEY
 import org.sopt.at.util.MyApplication.Companion.prefs
 
 @SuppressLint("CustomSplashScreen")
@@ -34,12 +35,15 @@ class SplashActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContent {
-            Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
+            Scaffold(modifier = Modifier
+                .fillMaxSize()
+                .background(Color.Black)
+            ) { innerPadding ->
                 Box(modifier = Modifier.padding(innerPadding)) {
                     ContentLayout()
 
                     splashHandler.postDelayed({
-                        val insertedId = prefs.getData("ID")
+                        val insertedId = prefs.getData(PREFS_ID_KEY)
 
                         val intent = if(insertedId.isNullOrBlank()) {
                             Intent(applicationContext, LoginActivity::class.java)
