@@ -1,4 +1,4 @@
-package org.sopt.at.signup.screen
+package org.sopt.at.ui.signup.screen
 
 import android.widget.Toast
 import androidx.compose.foundation.background
@@ -10,13 +10,10 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.imePadding
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
-import androidx.compose.material3.Icon
-import androidx.compose.material3.IconButton
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
 import androidx.compose.material3.TextFieldDefaults
@@ -29,30 +26,21 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
-import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.ImeAction
-import androidx.compose.ui.text.input.PasswordVisualTransformation
-import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
 import org.sopt.at.R
-import org.sopt.at.signup.navigation.SignUpScreenRoute
-
+import org.sopt.at.ui.signup.navigation.SignUpScreenRoute
 
 @Composable
-fun SignUpPwScreen(
+fun SignUpIdScreen(
     navController: NavHostController,
-    pwCallback: (String) -> Unit
+    signUpAccountState: SignUpAccountState
 ) {
     val context = LocalContext.current
-    var pwTextValue by remember { mutableStateOf("") }
-    var isNextBtnEnable by remember { mutableStateOf(false) }
-    var shouldShowPassword by remember { mutableStateOf(false) }
-
-    isNextBtnEnable = pwTextValue.isNotEmpty()
 
     Column (
         modifier = Modifier
@@ -64,7 +52,7 @@ fun SignUpPwScreen(
 
         // Title
         Text(
-            text = context.resources.getString(R.string.signup_pw_title),
+            text = context.resources.getString(R.string.signup_id_title),
             fontSize = 24.sp,
             color = Color.White,
             modifier = Modifier.align(Alignment.CenterHorizontally)
@@ -72,11 +60,11 @@ fun SignUpPwScreen(
 
         Spacer(modifier = Modifier.height(24.dp))
 
-        // Pw TextField
+        // ID TextField
         TextField(
-            value = pwTextValue,
-            onValueChange = { pwTextValue = it },
-            placeholder = { Text(text = context.resources.getString(R.string.signup_pw_placeholder)) },
+            value = signUpAccountState.id,
+            onValueChange = { signUpAccountState.id = it },
+            placeholder = { Text(text = context.resources.getString(R.string.signup_id_placeholder)) },
             singleLine = true,
             shape = RoundedCornerShape(2.dp),
             textStyle = TextStyle(
@@ -99,23 +87,6 @@ fun SignUpPwScreen(
                 focusedPlaceholderColor = Color.Gray,
                 unfocusedPlaceholderColor = Color.Gray
             ),
-            trailingIcon = {
-                IconButton(
-                    onClick = {
-                        shouldShowPassword = !shouldShowPassword
-                    },
-                    modifier = Modifier.size(24.dp)
-                ) {
-                    Icon(
-                        painter = painterResource(id = if(shouldShowPassword) R.drawable.icon_eye_open else R.drawable.icon_eye_close),
-                        tint = Color.White,
-                        contentDescription = "Password Toggle"
-                    )
-                }
-            },
-            visualTransformation =
-                if(shouldShowPassword) VisualTransformation.None
-                else PasswordVisualTransformation(),
             keyboardOptions = KeyboardOptions.Default.copy(imeAction = ImeAction.Done),
             modifier = Modifier
                 .fillMaxWidth()
@@ -125,7 +96,7 @@ fun SignUpPwScreen(
         Spacer(modifier = Modifier.height(16.dp))
 
         Text(
-            text = context.resources.getString(R.string.signup_pw_condition),
+            text = context.resources.getString(R.string.signup_id_condition),
             fontSize = 12.sp,
             color = Color.Gray,
         )
@@ -135,12 +106,12 @@ fun SignUpPwScreen(
         // Next Btn
         Button(
             onClick = {
-                if(isPwValid(pwTextValue)) {
-                    pwCallback.invoke(pwTextValue)
+                if(isIdValid(signUpAccountState.id)) {
+                    navController.navigate(SignUpScreenRoute.SignUpPwScreen.route)
                 }
-                else Toast.makeText(context, context.resources.getString(R.string.toast_signup_pw_fail), Toast.LENGTH_SHORT).show()
+                else Toast.makeText(context, context.resources.getString(R.string.toast_signup_id_fail), Toast.LENGTH_SHORT).show()
             },
-            enabled = isNextBtnEnable,
+            enabled = signUpAccountState.isNextBtnEnableForId,
             shape = RoundedCornerShape(2.dp),
             colors = ButtonDefaults.textButtonColors(
                 containerColor = Color.Black,
@@ -155,7 +126,7 @@ fun SignUpPwScreen(
                 .border(1.dp, Color.Gray),
             content = {
                 Text(
-                    text = context.resources.getString(R.string.signup_pw_next_btn),
+                    text = context.resources.getString(R.string.signup_id_next_btn),
                     fontSize = 16.sp,
                     fontWeight = FontWeight.Bold,
                 )
@@ -166,7 +137,7 @@ fun SignUpPwScreen(
     }
 }
 
-fun isPwValid(input: String): Boolean {
-    val regex = "^[a-zA-Z0-9~!@#$%^&*]{8,15}$".toRegex()
+fun isIdValid(input: String): Boolean {
+    val regex = "^[a-zA-Z0-9]{6,12}$".toRegex()
     return regex.matches(input)
 }

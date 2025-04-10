@@ -1,6 +1,5 @@
-package org.sopt.at.ui.theme
+package org.sopt.at.custom.theme
 
-import android.app.Activity
 import android.os.Build
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.material3.MaterialTheme

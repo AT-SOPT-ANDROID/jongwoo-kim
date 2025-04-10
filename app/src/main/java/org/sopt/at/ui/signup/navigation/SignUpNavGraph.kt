@@ -1,4 +1,4 @@
-package org.sopt.at.signup.navigation
+package org.sopt.at.ui.signup.navigation
 
 import androidx.compose.animation.slideInHorizontally
 import androidx.compose.animation.slideOutHorizontally
@@ -6,14 +6,15 @@ import androidx.compose.runtime.Composable
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
-import org.sopt.at.signup.screen.SignUpIdScreen
-import org.sopt.at.signup.screen.SignUpPwScreen
+import org.sopt.at.ui.signup.screen.SignUpAccountState
+import org.sopt.at.ui.signup.screen.SignUpIdScreen
+import org.sopt.at.ui.signup.screen.SignUpPwScreen
 
 @Composable
 fun SignupNavGraph(
     navController: NavHostController,
-    idCallback: (String) -> Unit,
-    pwCallback: (String) -> Unit
+    signUpAccountState: SignUpAccountState,
+    signUpEndCallback: () -> Unit,
 ) {
     NavHost(navController = navController, startDestination = SignUpScreenRoute.SignUpIdScreen.route) {
         composable(
@@ -23,7 +24,7 @@ fun SignupNavGraph(
             popEnterTransition = { slideInHorizontally(initialOffsetX = { -it }) },
             popExitTransition = { slideOutHorizontally(targetOffsetX = { it }) }
         ) {
-            SignUpIdScreen(navController, idCallback)
+            SignUpIdScreen(navController, signUpAccountState)
         }
 
         composable(
@@ -33,7 +34,7 @@ fun SignupNavGraph(
             popEnterTransition = { slideInHorizontally(initialOffsetX = { -it }) },
             popExitTransition = { slideOutHorizontally(targetOffsetX = { it }) }
         ) {
-            SignUpPwScreen(navController, pwCallback)
+            SignUpPwScreen(signUpAccountState, signUpEndCallback)
         }
     }
 }

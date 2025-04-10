@@ -1,4 +1,4 @@
-package org.sopt.at.signup
+package org.sopt.at.ui.signup
 
 import android.content.Intent
 import android.os.Bundle
@@ -16,17 +16,16 @@ import androidx.compose.ui.graphics.Color
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
 import org.sopt.at.R
-import org.sopt.at.signup.navigation.SignupNavGraph
-import org.sopt.at.ui.HeaderLayout
+import org.sopt.at.ui.signup.navigation.SignupNavGraph
+import org.sopt.at.custom.HeaderLayout
+import org.sopt.at.ui.login.rememberLoginAccountState
+import org.sopt.at.ui.signup.screen.rememberSignUpAccountState
 import org.sopt.at.util.MyApplication.Companion.ID_KEY
 import org.sopt.at.util.MyApplication.Companion.PW_KEY
 
 class SignUpActivity : ComponentActivity() {
 
     private lateinit var navController: NavHostController
-
-    private var idValue = ""
-    private var pwValue = ""
 
     private val finishIntent = Intent()
 
@@ -52,18 +51,14 @@ class SignUpActivity : ComponentActivity() {
     @Composable
     fun ContentLayout() {
         navController = rememberNavController()
+        val accountState = rememberSignUpAccountState()
 
         SignupNavGraph(
             navController = navController,
-            idCallback = { id ->
-                idValue = id
-            },
-            pwCallback = { pw ->
-                pwValue = pw
-
-                // 필수과제 로직
-                finishIntent.putExtra(ID_KEY, idValue)
-                finishIntent.putExtra(PW_KEY, pwValue)
+            signUpAccountState = accountState,
+            signUpEndCallback = {
+                finishIntent.putExtra(ID_KEY, accountState.id)
+                finishIntent.putExtra(PW_KEY, accountState.pw)
                 setResult(RESULT_OK, finishIntent)
                 finish()
                 overridePendingTransition(R.anim.slide_from_left, R.anim.slide_to_right)
