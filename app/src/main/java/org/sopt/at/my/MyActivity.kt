@@ -25,11 +25,10 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import org.sopt.at.R
-import org.sopt.at.login.LoginActivity
 import org.sopt.at.splash.SplashActivity
-import org.sopt.at.ui.theme.HeaderLayout
+import org.sopt.at.ui.HeaderLayout
+import org.sopt.at.util.MyApplication.Companion.PREFS_ID_KEY
 import org.sopt.at.util.MyApplication.Companion.prefs
-import kotlin.math.log
 
 class MyActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -52,7 +51,7 @@ class MyActivity : ComponentActivity() {
 
     @Composable
     fun ContentLayout() {
-        val idValue = prefs.getData("ID").toString()
+        val idValue = prefs.getData(PREFS_ID_KEY).toString()
 
         Column(modifier = Modifier.padding(vertical = 20.dp, horizontal = 16.dp)) {
             Text(

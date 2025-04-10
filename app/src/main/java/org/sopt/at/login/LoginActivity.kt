@@ -3,7 +3,6 @@ package org.sopt.at.login
 import android.content.Intent
 import android.os.Bundle
 import android.text.Html
-import android.util.Log
 import android.widget.Toast
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
@@ -56,7 +55,11 @@ import androidx.compose.ui.unit.sp
 import org.sopt.at.R
 import org.sopt.at.my.MyActivity
 import org.sopt.at.signup.SignUpActivity
-import org.sopt.at.ui.theme.HeaderLayout
+import org.sopt.at.ui.HeaderLayout
+import org.sopt.at.util.MyApplication.Companion.ID_KEY
+import org.sopt.at.util.MyApplication.Companion.PREFS_ID_KEY
+import org.sopt.at.util.MyApplication.Companion.PREFS_PW_KEY
+import org.sopt.at.util.MyApplication.Companion.PW_KEY
 import org.sopt.at.util.MyApplication.Companion.prefs
 import org.sopt.at.util.noRippleClickable
 import org.sopt.at.util.toAnnotatedString
@@ -203,7 +206,7 @@ class LoginActivity : ComponentActivity() {
             // Login Button
             Button(
                 onClick = {
-                    if(idTextValue == prefs.getData("ID") && pwTextValue == prefs.getData("PW")) {
+                    if(idTextValue == prefs.getData(PREFS_ID_KEY) && pwTextValue == prefs.getData(PREFS_PW_KEY)) {
                         val intent = Intent(this@LoginActivity, MyActivity::class.java)
                         startActivity(intent)
                     } else {
@@ -319,13 +322,11 @@ class LoginActivity : ComponentActivity() {
         registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result: ActivityResult ->
             if (result.resultCode == RESULT_OK) {
                 val data: Intent? = result.data
-                val id = data?.getStringExtra("ID") ?: ""
-                val pw = data?.getStringExtra("PW") ?: ""
+                val id = data?.getStringExtra(ID_KEY) ?: ""
+                val pw = data?.getStringExtra(PW_KEY) ?: ""
 
-                Log.d("Logd", "id = $id pw = $pw")
-
-                prefs.setData("ID", id)
-                prefs.setData("PW", pw)
+                prefs.setData(PREFS_ID_KEY, id)
+                prefs.setData(PREFS_PW_KEY, pw)
             }
         }
 

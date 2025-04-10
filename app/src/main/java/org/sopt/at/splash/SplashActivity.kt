@@ -19,12 +19,10 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.sp
 import org.sopt.at.R
 import org.sopt.at.login.LoginActivity
 import org.sopt.at.my.MyActivity
-import org.sopt.at.splash.ui.theme.ATSOPTANDROIDTheme
 import org.sopt.at.util.MyApplication.Companion.prefs
 
 @SuppressLint("CustomSplashScreen")
