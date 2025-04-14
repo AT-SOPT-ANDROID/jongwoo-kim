@@ -17,6 +17,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import org.sopt.at.R
 import org.sopt.at.custom.HeaderLayout
+import org.sopt.at.ui.main.MainActivity
 import org.sopt.at.ui.my.MyActivity
 import org.sopt.at.ui.signup.SignUpActivity
 import org.sopt.at.util.MyApplication.Companion.ID_KEY
@@ -54,7 +55,7 @@ class LoginActivity : ComponentActivity() {
                             loginAccountState = accountState,
                             onLoginClick = {
                                 if(accountState.id == prefs.getData(PREFS_ID_KEY) && accountState.pw == prefs.getData(PREFS_PW_KEY)) {
-                                    val intent = Intent(this@LoginActivity, MyActivity::class.java)
+                                    val intent = Intent(this@LoginActivity, MainActivity::class.java)
                                     startActivity(intent)
                                 } else {
                                     Toast.makeText(applicationContext, resources.getString(R.string.toast_login_fail), Toast.LENGTH_SHORT).show()

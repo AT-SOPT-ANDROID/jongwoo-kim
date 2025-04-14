@@ -3,7 +3,7 @@
 
     <!-- SplashActivity -->
     <string name="splash_title">TVING</string>
-    
+
     <!-- LoginActivity -->
     <string name="login_title">TVING ID 로그인</string>
     <string name="login_id_placeholder">아이디</string>
@@ -33,6 +33,13 @@
 
     <!-- MyActivity -->
     <string name="my_logout_btn">로그아웃</string>
+    <string name="title_activity_main">MainActivity</string>
 
+    <!-- MainScreen -->
+    <string name="bottom_navi_home">Home</string>
+    <string name="bottom_navi_shorts">Shorts</string>
+    <string name="bottom_navi_live">Live</string>
+    <string name="bottom_navi_search">Search</string>
+    <string name="bottom_navi_history">History</string>
 
 </resources>
