@@ -36,7 +36,10 @@ class MainViewModel @Inject constructor( ) : ViewModel() {
             MainBannerData(bannerPoster = R.drawable.drama1_poster_image, bannerContent = "드라마1 어쩌고 저쩌고"),
             MainBannerData(bannerPoster = R.drawable.drama2_poster_image, bannerContent = "드라마2 어쩌고 저쩌고"),
             MainBannerData(bannerPoster = R.drawable.drama3_poster_image, bannerContent = "드라마3 어쩌고 저쩌고"),
-        )
+            MainBannerData(bannerPoster = R.drawable.drama4_poster_image, bannerContent = "드라마4 어쩌고 저쩌고"),
+            MainBannerData(bannerPoster = R.drawable.drama5_poster_image, bannerContent = "드라마5 어쩌고 저쩌고"),
+            MainBannerData(bannerPoster = R.drawable.drama6_poster_image, bannerContent = "드라마6 어쩌고 저쩌고"),
+        ).shuffled()
 
         _mainBannerList.emit(mainBannerDataList)
     }
@@ -47,24 +50,24 @@ class MainViewModel @Inject constructor( ) : ViewModel() {
             KeywordData(keyword = "APPLETV", keywordPoster = R.drawable.appletv_logo),
             KeywordData(keyword = "ENA", keywordPoster = R.drawable.ena_logo),
             KeywordData(keyword = "UFC", keywordPoster = R.drawable.ufc_logo),
-        )
+        ).shuffled()
 
         _keywordList.emit(keywordDataList)
     }
 
     fun setRankingList() = viewModelScope.launch {
         val rankingDataList = listOf(
-            RankingData(rank = 1, poster = R.drawable.drama1_poster_image),
-            RankingData(rank = 2, poster = R.drawable.drama2_poster_image),
-            RankingData(rank = 3, poster = R.drawable.drama3_poster_image),
-            RankingData(rank = 4, poster = R.drawable.drama4_poster_image),
-            RankingData(rank = 5, poster = R.drawable.drama5_poster_image),
-            RankingData(rank = 6, poster = R.drawable.drama6_poster_image),
-            RankingData(rank = 7, poster = R.drawable.drama7_poster_image),
-            RankingData(rank = 8, poster = R.drawable.drama8_poster_image),
-            RankingData(rank = 9, poster = R.drawable.drama9_poster_image),
-            RankingData(rank = 10, poster = R.drawable.drama10_poster_image)
-        )
+            RankingData(poster = R.drawable.drama1_poster_image),
+            RankingData(poster = R.drawable.drama2_poster_image),
+            RankingData(poster = R.drawable.drama3_poster_image),
+            RankingData(poster = R.drawable.drama4_poster_image),
+            RankingData(poster = R.drawable.drama5_poster_image),
+            RankingData(poster = R.drawable.drama6_poster_image),
+            RankingData(poster = R.drawable.drama7_poster_image),
+            RankingData(poster = R.drawable.drama8_poster_image),
+            RankingData(poster = R.drawable.drama9_poster_image),
+            RankingData(poster = R.drawable.drama10_poster_image)
+        ).shuffled()
 
         _rankingList.emit(rankingDataList)
     }
@@ -81,7 +84,7 @@ class MainViewModel @Inject constructor( ) : ViewModel() {
             OnAirData(poster = R.drawable.drama3_poster_image),
             OnAirData(poster = R.drawable.drama2_poster_image),
             OnAirData(poster = R.drawable.drama1_poster_image)
-        )
+        ).shuffled()
 
         _onAirList.emit(onAirDataList)
     }

@@ -15,6 +15,11 @@ import org.sopt.at.ui.main.MainViewModel
 
 @Composable
 fun DramaScreen(viewModel: MainViewModel = hiltViewModel()) {
+    viewModel.setMainBannerList()
+    viewModel.setKeywordList()
+    viewModel.setRankingList()
+    viewModel.setOnAirList()
+
     LazyColumn(
         modifier = Modifier.fillMaxSize(),
         verticalArrangement = Arrangement.spacedBy(16.dp)

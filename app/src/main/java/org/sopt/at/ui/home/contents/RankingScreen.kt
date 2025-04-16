@@ -69,7 +69,7 @@ fun RankingScreen(viewModel: MainViewModel = hiltViewModel()) {
         ) {
             rankingList?.let {
                 items(it.size) { index ->
-                    RankingItemLayout(it[index])
+                    RankingItemLayout(index, it[index])
                 }
             }
         }
@@ -77,10 +77,10 @@ fun RankingScreen(viewModel: MainViewModel = hiltViewModel()) {
 }
 
 @Composable
-fun RankingItemLayout(rankingData: RankingData) {
+fun RankingItemLayout(index: Int, rankingData: RankingData) {
     Row {
         Text(
-            text = rankingData.rank.toString(),
+            text = (index+1).toString(),
             fontWeight = FontWeight.ExtraBold,
             fontSize = 64.sp,
             color = Color.White,

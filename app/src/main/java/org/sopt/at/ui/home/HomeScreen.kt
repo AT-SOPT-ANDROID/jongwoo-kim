@@ -65,11 +65,11 @@ fun HomeScreen(viewModel: MainViewModel = hiltViewModel()) {
         ) { page ->
             when(page) {
                 0 -> DramaScreen(viewModel)
-                1 -> VarietyScreen()
-                2 -> MovieScreen()
-                3 -> SportsScreen()
-                4 -> AnimeScreen()
-                5 -> NewsScreen()
+                1 -> VarietyScreen(viewModel)
+                2 -> MovieScreen(viewModel)
+                3 -> SportsScreen(viewModel)
+                4 -> AnimeScreen(viewModel)
+                5 -> NewsScreen(viewModel)
             }
         }
     }

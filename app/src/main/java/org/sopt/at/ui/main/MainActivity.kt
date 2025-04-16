@@ -30,11 +30,6 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
 
-        viewModel.setMainBannerList()
-        viewModel.setKeywordList()
-        viewModel.setRankingList()
-        viewModel.setOnAirList()
-
         setContent {
             var mainScreen by remember { mutableStateOf(MainNaviType.Home) }
 
