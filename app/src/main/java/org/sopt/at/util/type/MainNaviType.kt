@@ -1,5 +1,5 @@
 package org.sopt.at.util.type
 
-enum class HomeNaviType {
+enum class MainNaviType {
     Home, Shorts, Live, Search, History
 }

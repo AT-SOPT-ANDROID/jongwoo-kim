@@ -24,13 +24,13 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import org.sopt.at.R
 import org.sopt.at.util.noRippleClickable
-import org.sopt.at.util.type.HomeNaviType
+import org.sopt.at.util.type.MainNaviType
 
 @Composable
 fun MainBottomBarLayout(
-    naviBtnCallback: (HomeNaviType) -> Unit
+    naviBtnCallback: (MainNaviType) -> Unit
 ) {
-    var selectedNaviType by remember { mutableStateOf(HomeNaviType.Home) }
+    var selectedNaviType by remember { mutableStateOf(MainNaviType.Home) }
 
     Row(
         modifier = Modifier
@@ -43,15 +43,15 @@ fun MainBottomBarLayout(
                 .weight(1f)
                 .padding(top = 8.dp)
                 .noRippleClickable {
-                    selectedNaviType = HomeNaviType.Home
-                    naviBtnCallback.invoke(HomeNaviType.Home)
+                    selectedNaviType = MainNaviType.Home
+                    naviBtnCallback.invoke(MainNaviType.Home)
                 },
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
             Icon(
                 painter = painterResource(R.drawable.icon_home),
                 contentDescription = "",
-                tint = setNaviItemColor(HomeNaviType.Home, selectedNaviType),
+                tint = setNaviItemColor(MainNaviType.Home, selectedNaviType),
                 modifier = Modifier.size(24.dp)
             )
 
@@ -59,7 +59,7 @@ fun MainBottomBarLayout(
                 text = stringResource(R.string.bottom_navi_home),
                 fontSize = 12.sp,
                 fontWeight = FontWeight.Bold,
-                color = setNaviItemColor(HomeNaviType.Home, selectedNaviType)
+                color = setNaviItemColor(MainNaviType.Home, selectedNaviType)
             )
         }
 
@@ -68,15 +68,15 @@ fun MainBottomBarLayout(
                 .weight(1f)
                 .padding(top = 8.dp)
                 .noRippleClickable {
-                    selectedNaviType = HomeNaviType.Shorts
-                    naviBtnCallback.invoke(HomeNaviType.Shorts)
+                    selectedNaviType = MainNaviType.Shorts
+                    naviBtnCallback.invoke(MainNaviType.Shorts)
                 },
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
             Icon(
                 painter = painterResource(R.drawable.icon_shorts),
                 contentDescription = "",
-                tint = setNaviItemColor(HomeNaviType.Shorts, selectedNaviType),
+                tint = setNaviItemColor(MainNaviType.Shorts, selectedNaviType),
                 modifier = Modifier.size(24.dp)
             )
 
@@ -84,7 +84,7 @@ fun MainBottomBarLayout(
                 text = stringResource(R.string.bottom_navi_shorts),
                 fontSize = 12.sp,
                 fontWeight = FontWeight.Bold,
-                color = setNaviItemColor(HomeNaviType.Shorts, selectedNaviType),
+                color = setNaviItemColor(MainNaviType.Shorts, selectedNaviType),
             )
         }
 
@@ -93,15 +93,15 @@ fun MainBottomBarLayout(
                 .weight(1f)
                 .padding(top = 8.dp)
                 .noRippleClickable {
-                    selectedNaviType = HomeNaviType.Live
-                    naviBtnCallback.invoke(HomeNaviType.Live)
+                    selectedNaviType = MainNaviType.Live
+                    naviBtnCallback.invoke(MainNaviType.Live)
                 },
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
             Icon(
                 painter = painterResource(R.drawable.icon_live),
                 contentDescription = "",
-                tint = setNaviItemColor(HomeNaviType.Live, selectedNaviType),
+                tint = setNaviItemColor(MainNaviType.Live, selectedNaviType),
                 modifier = Modifier.size(24.dp)
             )
 
@@ -109,7 +109,7 @@ fun MainBottomBarLayout(
                 text = stringResource(R.string.bottom_navi_live),
                 fontSize = 12.sp,
                 fontWeight = FontWeight.Bold,
-                color = setNaviItemColor(HomeNaviType.Live, selectedNaviType)
+                color = setNaviItemColor(MainNaviType.Live, selectedNaviType)
             )
         }
 
@@ -118,15 +118,15 @@ fun MainBottomBarLayout(
                 .weight(1f)
                 .padding(top = 8.dp)
                 .noRippleClickable {
-                    selectedNaviType = HomeNaviType.Search
-                    naviBtnCallback.invoke(HomeNaviType.Search)
+                    selectedNaviType = MainNaviType.Search
+                    naviBtnCallback.invoke(MainNaviType.Search)
                 },
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
             Icon(
                 painter = painterResource(R.drawable.icon_search),
                 contentDescription = "",
-                tint = setNaviItemColor(HomeNaviType.Search, selectedNaviType),
+                tint = setNaviItemColor(MainNaviType.Search, selectedNaviType),
                 modifier = Modifier.size(24.dp)
             )
 
@@ -134,7 +134,7 @@ fun MainBottomBarLayout(
                 text = stringResource(R.string.bottom_navi_search),
                 fontSize = 12.sp,
                 fontWeight = FontWeight.Bold,
-                color = setNaviItemColor(HomeNaviType.Search, selectedNaviType)
+                color = setNaviItemColor(MainNaviType.Search, selectedNaviType)
             )
         }
 
@@ -143,15 +143,15 @@ fun MainBottomBarLayout(
                 .weight(1f)
                 .padding(top = 8.dp)
                 .noRippleClickable {
-                    selectedNaviType = HomeNaviType.History
-                    naviBtnCallback.invoke(HomeNaviType.History)
+                    selectedNaviType = MainNaviType.History
+                    naviBtnCallback.invoke(MainNaviType.History)
                 },
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
             Icon(
                 painter = painterResource(R.drawable.icon_history),
                 contentDescription = "",
-                tint = setNaviItemColor(HomeNaviType.History, selectedNaviType),
+                tint = setNaviItemColor(MainNaviType.History, selectedNaviType),
                 modifier = Modifier.size(24.dp)
             )
 
@@ -159,13 +159,13 @@ fun MainBottomBarLayout(
                 text = stringResource(R.string.bottom_navi_history),
                 fontSize = 12.sp,
                 fontWeight = FontWeight.Bold,
-                color = setNaviItemColor(HomeNaviType.History, selectedNaviType)
+                color = setNaviItemColor(MainNaviType.History, selectedNaviType)
             )
         }
     }
 }
 
-private fun setNaviItemColor(currentNaviType: HomeNaviType, selectedNaviType: HomeNaviType): Color {
+private fun setNaviItemColor(currentNaviType: MainNaviType, selectedNaviType: MainNaviType): Color {
     return if (currentNaviType == selectedNaviType) {
         Color.White
     } else {
