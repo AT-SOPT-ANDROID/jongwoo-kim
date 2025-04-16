@@ -28,7 +28,7 @@ import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import org.sopt.at.R
-import org.sopt.at.data.RankingData
+import org.sopt.at.data.VideoData
 import org.sopt.at.ui.main.MainViewModel
 
 @Composable
@@ -77,7 +77,7 @@ fun RankingScreen(viewModel: MainViewModel = hiltViewModel()) {
 }
 
 @Composable
-fun RankingItemLayout(index: Int, rankingData: RankingData) {
+fun RankingItemLayout(index: Int, rankingData: VideoData) {
     Row {
         Text(
             text = (index+1).toString(),
@@ -88,7 +88,7 @@ fun RankingItemLayout(index: Int, rankingData: RankingData) {
         )
 
         Image(
-            painter = painterResource(rankingData.poster),
+            painter = painterResource(rankingData.videoPoster ?: 0),
             contentDescription = "",
             contentScale = ContentScale.Crop,
             modifier = Modifier

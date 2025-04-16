@@ -26,7 +26,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
-import org.sopt.at.data.MainBannerData
+import org.sopt.at.data.VideoData
 import org.sopt.at.ui.main.MainViewModel
 
 @Composable
@@ -53,14 +53,14 @@ fun MainBannerScreen(viewModel: MainViewModel = hiltViewModel()) {
 }
 
 @Composable
-fun MainBannerItemLayout(mainBannerData: MainBannerData) {
+fun MainBannerItemLayout(mainBannerData: VideoData) {
     Box(
         modifier = Modifier
             .fillMaxSize()
             .clip(shape = RoundedCornerShape(8.dp))
     ) {
         Image(
-            painter = painterResource(id = mainBannerData.bannerPoster),
+            painter = painterResource(id = mainBannerData.videoPoster ?: 0),
             contentDescription = "",
             contentScale = ContentScale.Crop,
             modifier = Modifier.fillMaxSize()
@@ -73,7 +73,7 @@ fun MainBannerItemLayout(mainBannerData: MainBannerData) {
                 .padding(16.dp)
         ) {
             Text(
-                text = mainBannerData.bannerContent,
+                text = mainBannerData.videoTitle ?: "",
                 fontWeight = FontWeight.Normal,
                 fontSize = 24.sp,
                 color = Color.White,

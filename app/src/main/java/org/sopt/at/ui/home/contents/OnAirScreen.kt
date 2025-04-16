@@ -29,7 +29,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import org.sopt.at.R
-import org.sopt.at.data.OnAirData
+import org.sopt.at.data.VideoData
 
 @Composable
 fun OnAirScreen(viewModel: MainViewModel = hiltViewModel()) {
@@ -66,9 +66,9 @@ fun OnAirScreen(viewModel: MainViewModel = hiltViewModel()) {
 }
 
 @Composable
-fun OnAirItemLayout(onAirData: OnAirData) {
+fun OnAirItemLayout(onAirData: VideoData) {
     Image(
-        painter = painterResource(onAirData.poster),
+        painter = painterResource(onAirData.videoPoster ?: 0),
         contentDescription = "",
         contentScale = ContentScale.Crop,
         modifier = Modifier
