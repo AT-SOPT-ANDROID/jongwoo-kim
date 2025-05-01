@@ -1,9 +1,10 @@
 package org.sopt.at.ui.home
 
-import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.setValue
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
@@ -13,6 +14,7 @@ import androidx.compose.foundation.pager.PagerState
 import androidx.compose.foundation.pager.rememberPagerState
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
@@ -24,9 +26,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
-import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
-import org.sopt.at.R
 import org.sopt.at.custom.HomeScrollableTabRow
 import org.sopt.at.data.HomeCategoryData
 import org.sopt.at.ui.home.tabScreen.AnimeScreen
@@ -38,12 +38,14 @@ import org.sopt.at.ui.home.tabScreen.VarietyScreen
 import org.sopt.at.ui.main.MainViewModel
 import org.sopt.at.util.noRippleClickable
 
-@OptIn(ExperimentalFoundationApi::class)
 @Composable
 fun HomeScreen(viewModel: MainViewModel = hiltViewModel()) {
     viewModel.setHomeCategoryList()
-    val homeTabList = viewModel.homeCategoryList.collectAsStateWithLifecycle()
-    val pagerState = rememberPagerState(pageCount = { homeTabList.value?.size ?: 0 } )
+    val homeTabList by viewModel.homeCategoryList.collectAsStateWithLifecycle()
+    val pagerState = rememberPagerState(pageCount = { homeTabList?.size ?: 0 } )
+
+    var tabTitleList by remember { mutableStateOf<List<Int>>(listOf()) }
+    tabTitleList = homeTabList?.map { it.categoryNameResId ?: 0 } ?: listOf()
 
     Column(
         modifier = Modifier
@@ -51,7 +53,7 @@ fun HomeScreen(viewModel: MainViewModel = hiltViewModel()) {
             .background(Color.Black)
     ) {
         HomeTabRowLayout(
-            pages = homeTabList.value ?: listOf(),
+            pages = tabTitleList,
             pagerState = pagerState
         )
 
@@ -74,7 +76,7 @@ fun HomeScreen(viewModel: MainViewModel = hiltViewModel()) {
 
 @Composable
 fun HomeTabRowLayout(
-    pages: List<HomeCategoryData>,
+    pages: List<Int>,
     pagerState: PagerState
 ) {
     val tabCoroutineScope = rememberCoroutineScope()
@@ -87,7 +89,7 @@ fun HomeTabRowLayout(
         contentColor = Color.White,
         edgePadding = 0.dp,
     ) {
-        pages.forEachIndexed { index, homeCategoryData ->
+        pages.forEachIndexed { index, titleResId ->
             val selected = (currentPage == index)
 
             Box(
@@ -102,7 +104,7 @@ fun HomeTabRowLayout(
                     },
                 contentAlignment = Alignment.Center
             ) {
-                val titleResId = homeCategoryData.categoryNameResId ?: return@forEachIndexed
+                val titleResId = titleResId
 
                 Text(
                     text = stringResource(titleResId),
