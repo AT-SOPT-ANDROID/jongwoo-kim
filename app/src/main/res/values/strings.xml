@@ -3,7 +3,7 @@
 
     <!-- SplashActivity -->
     <string name="splash_title">TVING</string>
-    
+
     <!-- LoginActivity -->
     <string name="login_title">TVING ID 로그인</string>
     <string name="login_id_placeholder">아이디</string>
@@ -33,6 +33,29 @@
 
     <!-- MyActivity -->
     <string name="my_logout_btn">로그아웃</string>
+    <string name="title_activity_main">MainActivity</string>
 
+    <!-- MainScreen -->
+    <string name="bottom_navi_home">Home</string>
+    <string name="bottom_navi_shorts">Shorts</string>
+    <string name="bottom_navi_live">Live</string>
+    <string name="bottom_navi_search">Search</string>
+    <string name="bottom_navi_history">History</string>
+
+    <!-- HomeScreen -->
+    <string name="home_tab_drama">드라마</string>
+    <string name="home_tab_variety">예능</string>
+    <string name="home_tab_movie">영화</string>
+    <string name="home_tab_sports">스포츠</string>
+    <string name="home_tab_animation">애니</string>
+    <string name="home_tab_news">뉴스</string>
+
+
+    <!-- RankingScreen -->
+    <string name="home_ranking_screen_title">오늘의 티빙</string>
+    <string name="home_ranking_screen_sub_title">TOP 10</string>
+
+    <!-- OnAirScreen -->
+    <string name="home_onair_screen_title">지금 방영 중인 콘텐츠</string>
 
 </resources>

@@ -2,9 +2,11 @@ package org.sopt.at.util
 
 import android.app.Application
 import android.widget.Toast
+import dagger.hilt.android.HiltAndroidApp
 import org.sopt.at.util.preference.PreferenceUtil
 import kotlin.system.exitProcess
 
+@HiltAndroidApp
 class MyApplication : Application() {
 
     companion object {

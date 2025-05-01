@@ -22,6 +22,7 @@ import androidx.compose.ui.unit.sp
 import kotlinx.coroutines.delay
 import org.sopt.at.R
 import org.sopt.at.ui.login.LoginActivity
+import org.sopt.at.ui.main.MainActivity
 import org.sopt.at.ui.my.MyActivity
 import org.sopt.at.util.MyApplication.Companion.PREFS_ID_KEY
 import org.sopt.at.util.MyApplication.Companion.prefs
@@ -40,7 +41,7 @@ class SplashActivity : ComponentActivity() {
                 val intent = if(insertedId.isNullOrBlank()) {
                     Intent(applicationContext, LoginActivity::class.java)
                 } else {
-                    Intent(applicationContext, MyActivity::class.java)
+                    Intent(applicationContext, MainActivity::class.java)
                 }
                 startActivity(intent)
                 finish()
