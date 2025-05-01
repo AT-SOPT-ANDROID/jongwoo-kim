@@ -23,7 +23,6 @@ import kotlinx.coroutines.delay
 import org.sopt.at.R
 import org.sopt.at.ui.login.LoginActivity
 import org.sopt.at.ui.main.MainActivity
-import org.sopt.at.ui.my.MyActivity
 import org.sopt.at.util.MyApplication.Companion.PREFS_ID_KEY
 import org.sopt.at.util.MyApplication.Companion.prefs
 

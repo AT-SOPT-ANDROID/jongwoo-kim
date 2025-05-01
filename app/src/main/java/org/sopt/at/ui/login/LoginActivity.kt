@@ -18,7 +18,6 @@ import androidx.compose.ui.graphics.Color
 import org.sopt.at.R
 import org.sopt.at.custom.HeaderLayout
 import org.sopt.at.ui.main.MainActivity
-import org.sopt.at.ui.my.MyActivity
 import org.sopt.at.ui.signup.SignUpActivity
 import org.sopt.at.util.MyApplication.Companion.ID_KEY
 import org.sopt.at.util.MyApplication.Companion.PREFS_ID_KEY

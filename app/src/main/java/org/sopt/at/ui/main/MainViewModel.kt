@@ -1,5 +1,6 @@
 package org.sopt.at.ui.main
 
+import androidx.compose.ui.res.stringResource
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -9,6 +10,7 @@ import kotlinx.coroutines.flow.asSharedFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
 import org.sopt.at.R
+import org.sopt.at.data.HomeCategoryData
 import org.sopt.at.data.KeywordData
 import org.sopt.at.data.VideoData
 import javax.inject.Inject
@@ -28,6 +30,22 @@ class MainViewModel @Inject constructor( ) : ViewModel() {
     private var _onAirList = MutableStateFlow<List<VideoData>?>(null)
     var onAirList = _onAirList.asStateFlow()
 
+    private var _homeCategoryList = MutableStateFlow<List<HomeCategoryData>?>(null)
+    var homeCategoryList = _homeCategoryList.asStateFlow()
+
+
+    fun setHomeCategoryList() = viewModelScope.launch {
+        val homeCategoryDataList = listOf(
+            HomeCategoryData(categoryNameResId = R.string.home_tab_drama),
+            HomeCategoryData(categoryNameResId = R.string.home_tab_variety),
+            HomeCategoryData(categoryNameResId = R.string.home_tab_movie),
+            HomeCategoryData(categoryNameResId = R.string.home_tab_sports),
+            HomeCategoryData(categoryNameResId = R.string.home_tab_animation),
+            HomeCategoryData(categoryNameResId = R.string.home_tab_news),
+        )
+
+        _homeCategoryList.emit(homeCategoryDataList)
+    }
 
     fun setMainBannerList() = viewModelScope.launch {
         val mainBannerDataList = listOf(
