@@ -49,9 +49,7 @@ fun HeaderLayout(backBtnCallback: () -> Unit) {
 }
 
 @Composable
-fun MainHeaderLayout(logoutCallback: () -> Unit) {
-    var showMyScreen by remember { mutableStateOf(false) }
-
+fun MainHeaderLayout(showMyScreen: () -> Unit) {
     Row (
         modifier = Modifier
             .background(Color.Black)
@@ -87,15 +85,8 @@ fun MainHeaderLayout(logoutCallback: () -> Unit) {
             modifier = Modifier
                 .size(36.dp)
                 .noRippleClickable {
-                    showMyScreen = true
+                    showMyScreen.invoke()
                 }
         )
-    }
-
-    if (showMyScreen) {
-        MyScreen(logoutCallback = {
-            showMyScreen = false
-            logoutCallback.invoke()
-        })
     }
 }

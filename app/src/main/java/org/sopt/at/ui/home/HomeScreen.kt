@@ -1,5 +1,6 @@
 package org.sopt.at.ui.home
 
+import android.util.Log
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -44,16 +45,13 @@ fun HomeScreen(viewModel: MainViewModel = hiltViewModel()) {
     val homeTabList by viewModel.homeCategoryList.collectAsStateWithLifecycle()
     val pagerState = rememberPagerState(pageCount = { homeTabList?.size ?: 0 } )
 
-    var tabTitleList by remember { mutableStateOf<List<Int>>(listOf()) }
-    tabTitleList = homeTabList?.map { it.categoryNameResId ?: 0 } ?: listOf()
-
     Column(
         modifier = Modifier
             .fillMaxSize()
             .background(Color.Black)
     ) {
         HomeTabRowLayout(
-            pages = tabTitleList,
+            pages = homeTabList ?: listOf(),
             pagerState = pagerState
         )
 
@@ -76,7 +74,7 @@ fun HomeScreen(viewModel: MainViewModel = hiltViewModel()) {
 
 @Composable
 fun HomeTabRowLayout(
-    pages: List<Int>,
+    pages: List<HomeCategoryData>,
     pagerState: PagerState
 ) {
     val tabCoroutineScope = rememberCoroutineScope()
@@ -89,7 +87,7 @@ fun HomeTabRowLayout(
         contentColor = Color.White,
         edgePadding = 0.dp,
     ) {
-        pages.forEachIndexed { index, titleResId ->
+        pages.forEachIndexed { index, homeCategoryData ->
             val selected = (currentPage == index)
 
             Box(
@@ -104,7 +102,7 @@ fun HomeTabRowLayout(
                     },
                 contentAlignment = Alignment.Center
             ) {
-                val titleResId = titleResId
+                val titleResId = homeCategoryData.categoryNameResId ?: 0
 
                 Text(
                     text = stringResource(titleResId),

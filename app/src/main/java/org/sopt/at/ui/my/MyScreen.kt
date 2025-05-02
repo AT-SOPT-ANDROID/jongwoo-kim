@@ -2,8 +2,12 @@ package org.sopt.at.ui.my
 
 import android.content.Context
 import android.content.Intent
+import androidx.activity.compose.BackHandler
+import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -12,14 +16,24 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import org.sopt.at.custom.theme.Black00
 import org.sopt.at.ui.my.component.LogoutButton
 import org.sopt.at.ui.splash.SplashActivity
 import org.sopt.at.util.MyApplication.Companion.PREFS_ID_KEY
 import org.sopt.at.util.MyApplication.Companion.prefs
 
 @Composable
-fun MyScreen(logoutCallback: () -> Unit) {
-    ContentLayout(logoutCallback)
+fun MyScreen(logoutCallback: () -> Unit, closeMyScreen: () -> Unit) {
+    BackHandler {
+        closeMyScreen.invoke()
+    }
+
+    Box(modifier = Modifier
+        .fillMaxSize()
+        .background(Color.Black)
+    ) {
+        ContentLayout(logoutCallback)
+    }
 }
 
 @Composable

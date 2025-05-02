@@ -1,6 +1,5 @@
 package org.sopt.at.ui.main
 
-import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import androidx.activity.ComponentActivity
@@ -37,10 +36,11 @@ class MainActivity : ComponentActivity() {
 
         setContent {
             var mainScreen by remember { mutableStateOf(MainNaviType.Home) }
+            var showMyScreen by remember { mutableStateOf(false) }
 
             Scaffold(modifier = Modifier.fillMaxSize(), topBar = {
                 MainHeaderLayout {
-                    logout()
+                    showMyScreen = true
                 }
             }, content = { innerPadding ->
                 Box(modifier = Modifier.padding(innerPadding).background(Color.Black)) {
@@ -51,6 +51,14 @@ class MainActivity : ComponentActivity() {
                     mainScreen = type
                 })
             })
+
+            if (showMyScreen) {
+                MyScreen(logoutCallback = {
+                    logout()
+                }, closeMyScreen = {
+                    showMyScreen = false
+                })
+            }
         }
     }
 
