@@ -53,11 +53,14 @@ class MainActivity : ComponentActivity() {
             })
 
             if (showMyScreen) {
-                MyScreen(logoutCallback = {
-                    logout()
-                }, closeMyScreen = {
-                    showMyScreen = false
-                })
+                MyScreen(
+                    viewModel = viewModel,
+                    logoutCallback = {
+                        logout()
+                    }, closeMyScreen = {
+                        showMyScreen = false
+                    }
+                )
             }
         }
     }

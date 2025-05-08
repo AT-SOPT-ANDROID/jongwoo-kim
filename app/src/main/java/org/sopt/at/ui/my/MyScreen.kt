@@ -13,31 +13,36 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import org.sopt.at.ui.main.MainViewModel
 import org.sopt.at.ui.my.component.LogoutButton
 import org.sopt.at.util.MyApplication.Companion.LOGIN_ID
 import org.sopt.at.util.MyApplication.Companion.prefs
 
 @Composable
-fun MyScreen(logoutCallback: () -> Unit, closeMyScreen: () -> Unit) {
+fun MyScreen(viewModel: MainViewModel = hiltViewModel(), logoutCallback: () -> Unit, closeMyScreen: () -> Unit) {
     BackHandler {
         closeMyScreen.invoke()
     }
+
+    viewModel.getMyInfo()
 
     Box(modifier = Modifier
         .fillMaxSize()
         .background(Color.Black)
     ) {
-        ContentLayout(logoutCallback)
+        ContentLayout(viewModel, logoutCallback)
     }
 }
 
 @Composable
-fun ContentLayout(logoutCallback: () -> Unit) {
-    val idValue = prefs.getData(LOGIN_ID).toString()
+fun ContentLayout(viewModel: MainViewModel, logoutCallback: () -> Unit) {
+    val nickNameValue = viewModel.myInfo.collectAsStateWithLifecycle()
 
     Column(modifier = Modifier.padding(vertical = 20.dp, horizontal = 16.dp)) {
         Text(
-            text = idValue,
+            text = nickNameValue.value ?: "",
             fontSize = 24.sp,
             color = Color.White
         )

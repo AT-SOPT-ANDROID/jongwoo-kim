@@ -13,26 +13,33 @@ import org.sopt.at.R
 import org.sopt.at.data.HomeCategoryData
 import org.sopt.at.data.KeywordData
 import org.sopt.at.data.VideoData
+import org.sopt.at.di.ServicePool
+import org.sopt.at.util.MyApplication.Companion.USER_ID
+import org.sopt.at.util.MyApplication.Companion.prefs
 import javax.inject.Inject
 
 @HiltViewModel
 class MainViewModel @Inject constructor( ) : ViewModel() {
 
-    private var _mainBannerList = MutableStateFlow<List<VideoData>?>(null)
-    var mainBannerList = _mainBannerList.asStateFlow()
+    private val _mainBannerList = MutableStateFlow<List<VideoData>?>(null)
+    val mainBannerList = _mainBannerList.asStateFlow()
 
-    private var _keywordList = MutableStateFlow<List<KeywordData>?>(null)
-    var keywordList = _keywordList.asStateFlow()
+    private val _keywordList = MutableStateFlow<List<KeywordData>?>(null)
+    val keywordList = _keywordList.asStateFlow()
 
-    private var _rankingList = MutableStateFlow<List<VideoData>?>(null)
-    var rankingList = _rankingList.asStateFlow()
+    private val _rankingList = MutableStateFlow<List<VideoData>?>(null)
+    val rankingList = _rankingList.asStateFlow()
 
-    private var _onAirList = MutableStateFlow<List<VideoData>?>(null)
-    var onAirList = _onAirList.asStateFlow()
+    private val _onAirList = MutableStateFlow<List<VideoData>?>(null)
+    val onAirList = _onAirList.asStateFlow()
 
-    private var _homeCategoryList = MutableStateFlow<List<HomeCategoryData>?>(null)
-    var homeCategoryList = _homeCategoryList.asStateFlow()
+    private val _homeCategoryList = MutableStateFlow<List<HomeCategoryData>?>(null)
+    val homeCategoryList = _homeCategoryList.asStateFlow()
 
+    private val _myInfo = MutableStateFlow<String?>(null)
+    val myInfo = _myInfo.asStateFlow()
+    
+    
 
     fun setHomeCategoryList() = viewModelScope.launch {
         val homeCategoryDataList = listOf(
@@ -104,4 +111,16 @@ class MainViewModel @Inject constructor( ) : ViewModel() {
 
         _onAirList.emit(onAirDataList)
     }
+
+    fun getMyInfo() = viewModelScope.launch {
+        val myUserId: Long = prefs.getData(USER_ID)?.toLong() ?: 0
+        val result = ServicePool.userService.getMyNickName(myUserId)
+
+        if(result.isSuccessful) {
+            result.body()?.let {
+                _myInfo.emit(it.data?.nickname)
+            }
+        }
+    }
+
 }
