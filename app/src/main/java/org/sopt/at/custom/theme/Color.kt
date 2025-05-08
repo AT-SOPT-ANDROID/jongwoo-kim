@@ -31,6 +31,7 @@ val Black80 = Color(0xCC1A1A20)
 val Black90 = Color(0xE61A1A20)
 
 /** WHITE **/
+val White = Color(0xFFFDFDFE)
 val White10 = Color(0x1AFDFDFE)
 val White20 = Color(0x33FDFDFE)
 val White30 = Color(0x4DFDFDFE)

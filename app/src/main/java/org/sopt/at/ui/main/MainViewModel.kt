@@ -38,6 +38,9 @@ class MainViewModel @Inject constructor( ) : ViewModel() {
 
     private val _myInfo = MutableStateFlow<String?>(null)
     val myInfo = _myInfo.asStateFlow()
+
+    private val _searchResultList = MutableStateFlow<List<String>?>(null)
+    val searchResultList = _searchResultList.asStateFlow()
     
     
 
@@ -119,6 +122,16 @@ class MainViewModel @Inject constructor( ) : ViewModel() {
         if(result.isSuccessful) {
             result.body()?.let {
                 _myInfo.emit(it.data?.nickname)
+            }
+        }
+    }
+
+    fun searchUserInfo(searchText: String) = viewModelScope.launch {
+        val result = ServicePool.userService.getNickNameList(searchText)
+
+        if(result.isSuccessful) {
+            result.body()?.let {
+                _searchResultList.emit(it.data?.nicknameList)
             }
         }
     }

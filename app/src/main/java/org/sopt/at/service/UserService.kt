@@ -24,6 +24,6 @@ interface UserService {
     @GET("api/v1/users/me")
     suspend fun getMyNickName(@Header("userId") userId: Long): Response<MyNickNameResponse>
 
-    @GET("api/v1/users/nickname")
+    @GET("api/v1/users")
     suspend fun getNickNameList(@Query("keyword") keyword: String): Response<NickNameListResponse>
 }

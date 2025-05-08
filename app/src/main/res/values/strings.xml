@@ -68,4 +68,7 @@
     <!-- OnAirScreen -->
     <string name="home_onair_screen_title">지금 방영 중인 콘텐츠</string>
 
+    <!-- SearchScreen -->
+    <string name="search_placeholder">검색어를 입력하세요</string>
+
 </resources>
