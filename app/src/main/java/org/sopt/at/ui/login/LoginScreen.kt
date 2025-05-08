@@ -13,6 +13,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Text
+import androidx.compose.material3.VerticalDivider
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -93,7 +94,7 @@ fun LoginScreen(
                     }
             )
 
-            HorizontalDivider(thickness = 1.dp, color = Color.Gray, modifier = Modifier.padding(horizontal = 10.dp))
+            VerticalDivider(thickness = 1.dp, color = Color.Gray, modifier = Modifier.padding(horizontal = 10.dp).height(20.dp))
 
             Text(
                 text = stringResource(R.string.login_find_pw_btn),
@@ -106,7 +107,7 @@ fun LoginScreen(
                     }
             )
 
-            HorizontalDivider(thickness = 1.dp, color = Color.Gray, modifier = Modifier.padding(horizontal = 10.dp))
+            VerticalDivider(thickness = 1.dp, color = Color.Gray, modifier = Modifier.padding(horizontal = 10.dp).height(20.dp))
 
             Text(
                 text = stringResource(R.string.login_signup_btn),
