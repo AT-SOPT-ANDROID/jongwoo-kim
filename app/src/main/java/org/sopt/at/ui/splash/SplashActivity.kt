@@ -6,6 +6,7 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
+import androidx.activity.viewModels
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
@@ -19,31 +20,37 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.sp
+import androidx.lifecycle.lifecycleScope
 import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 import org.sopt.at.R
 import org.sopt.at.ui.login.LoginActivity
 import org.sopt.at.ui.main.MainActivity
-import org.sopt.at.util.MyApplication.Companion.PREFS_ID_KEY
+import org.sopt.at.util.MyApplication.Companion.USER_ID
 import org.sopt.at.util.MyApplication.Companion.prefs
 
 @SuppressLint("CustomSplashScreen")
 class SplashActivity : ComponentActivity() {
+    private val viewModel: SplashViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
+
+        initObserver()
+
         setContent {
             LaunchedEffect(Unit) {
                 delay(2000)
-                val insertedId = prefs.getData(PREFS_ID_KEY)
+                val insertedId = prefs.getData(USER_ID)
 
-                val intent = if(insertedId.isNullOrBlank()) {
-                    Intent(applicationContext, LoginActivity::class.java)
+                if(insertedId.isNullOrBlank()) {
+                    val intent = Intent(applicationContext, LoginActivity::class.java)
+                    startActivity(intent)
+                    finish()
                 } else {
-                    Intent(applicationContext, MainActivity::class.java)
+                    viewModel.autoSignIn()
                 }
-                startActivity(intent)
-                finish()
             }
 
             Scaffold(modifier = Modifier
@@ -69,6 +76,18 @@ class SplashActivity : ComponentActivity() {
                 color = Color.Red,
                 modifier = Modifier.align(Alignment.Center)
             )
+        }
+    }
+
+    private fun initObserver() {
+        lifecycleScope.launch {
+            viewModel.signInSuccess.collect {
+                if(it == null) return@collect
+
+                val intent = Intent(applicationContext, MainActivity::class.java)
+                startActivity(intent)
+                finish()
+            }
         }
     }
 }

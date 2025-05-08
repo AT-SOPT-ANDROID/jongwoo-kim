@@ -1,5 +1,6 @@
 package org.sopt.at.di
 
+import com.google.gson.GsonBuilder
 import com.jakewharton.retrofit2.converter.kotlinx.serialization.asConverterFactory
 import kotlinx.serialization.json.Json
 import okhttp3.MediaType.Companion.toMediaType
@@ -8,6 +9,7 @@ import okhttp3.logging.HttpLoggingInterceptor
 import org.sopt.at.BuildConfig
 import org.sopt.at.service.UserService
 import retrofit2.Retrofit
+import retrofit2.converter.gson.GsonConverterFactory
 
 object ApiFactory {
     private const val BASE_URL: String = BuildConfig.BASE_URL
@@ -20,10 +22,15 @@ object ApiFactory {
         .addInterceptor(loggingInterceptor)
         .build()
 
+    val gson = GsonBuilder()
+        .serializeSpecialFloatingPointValues()
+        .create()
+
     val retrofit: Retrofit by lazy {
         Retrofit.Builder()
             .baseUrl(BASE_URL)
             .client(client)
+            .addConverterFactory(GsonConverterFactory.create(gson))
             .addConverterFactory(Json.asConverterFactory("application/json".toMediaType()))
             .build()
     }
