@@ -20,7 +20,7 @@ import androidx.navigation.compose.rememberNavController
 import kotlinx.coroutines.launch
 import org.sopt.at.R
 import org.sopt.at.custom.HeaderLayout
-import org.sopt.at.dataSource.SignUpRequest
+import org.sopt.at.domain.dataSource.SignUpRequest
 import org.sopt.at.ui.signup.navigation.SignupNavGraph
 import org.sopt.at.ui.signup.screen.rememberSignUpAccountState
 

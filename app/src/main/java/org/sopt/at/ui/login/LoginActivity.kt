@@ -18,7 +18,7 @@ import androidx.lifecycle.lifecycleScope
 import kotlinx.coroutines.launch
 import org.sopt.at.R
 import org.sopt.at.custom.HeaderLayout
-import org.sopt.at.dataSource.SignInRequest
+import org.sopt.at.domain.dataSource.SignInRequest
 import org.sopt.at.ui.main.MainActivity
 import org.sopt.at.ui.signup.SignUpActivity
 import org.sopt.at.util.MyApplication.Companion.LOGIN_ID

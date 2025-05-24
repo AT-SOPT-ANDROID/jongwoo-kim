@@ -1,25 +1,21 @@
 package org.sopt.at.ui.signup
 
-import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.asSharedFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
-import org.sopt.at.dataSource.SignUpData
-import org.sopt.at.dataSource.SignUpRequest
-import org.sopt.at.dataSource.SignUpResponse
+import org.sopt.at.domain.dataSource.SignUpData
+import org.sopt.at.domain.dataSource.SignUpRequest
 import org.sopt.at.di.ServicePool
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
+import org.sopt.at.domain.repository.UserRepository
 import javax.inject.Inject
 
 @HiltViewModel
-class SignUpViewModel @Inject constructor(): ViewModel() {
+class SignUpViewModel @Inject constructor(
+    private val userRepository: UserRepository
+): ViewModel() {
 
     private val _signUpSuccess = MutableStateFlow<SignUpData?>(null)
     val signUpSuccess = _signUpSuccess.asStateFlow()
@@ -29,7 +25,7 @@ class SignUpViewModel @Inject constructor(): ViewModel() {
 
 
     fun signUp(signUpRequest: SignUpRequest) = viewModelScope.launch {
-        val result = ServicePool.userService.signUpUser(signUpRequest)
+        val result = userRepository.signUpUser(signUpRequest)
 
         if(result.isSuccessful) {
             result.body()?.let {

@@ -28,7 +28,7 @@ import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import org.sopt.at.R
-import org.sopt.at.data.VideoData
+import org.sopt.at.domain.dataSource.VideoData
 import org.sopt.at.ui.main.MainViewModel
 
 @Composable

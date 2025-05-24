@@ -1,4 +1,4 @@
-package org.sopt.at.data
+package org.sopt.at.domain.dataSource
 
 data class VideoData (
     var videoTitle: String? = null,

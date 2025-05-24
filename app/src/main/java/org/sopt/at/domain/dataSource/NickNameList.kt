@@ -1,4 +1,4 @@
-package org.sopt.at.dataSource
+package org.sopt.at.domain.dataSource
 
 data class NickNameListResponse (
     var success: Boolean? = null,

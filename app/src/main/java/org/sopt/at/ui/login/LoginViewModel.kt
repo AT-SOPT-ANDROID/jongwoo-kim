@@ -6,10 +6,8 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
-import org.sopt.at.dataSource.SignInData
-import org.sopt.at.dataSource.SignInRequest
-import org.sopt.at.dataSource.SignUpData
-import org.sopt.at.dataSource.SignUpRequest
+import org.sopt.at.domain.dataSource.SignInData
+import org.sopt.at.domain.dataSource.SignInRequest
 import org.sopt.at.di.ServicePool
 import javax.inject.Inject
 

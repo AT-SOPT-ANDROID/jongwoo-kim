@@ -1,12 +1,11 @@
-package org.sopt.at.service
+package org.sopt.at.data.service
 
-import org.sopt.at.dataSource.MyNickNameResponse
-import org.sopt.at.dataSource.NickNameListResponse
-import org.sopt.at.dataSource.SignInRequest
-import org.sopt.at.dataSource.SignInResponse
-import org.sopt.at.dataSource.SignUpRequest
-import org.sopt.at.dataSource.SignUpResponse
-import retrofit2.Call
+import org.sopt.at.domain.dataSource.MyNickNameResponse
+import org.sopt.at.domain.dataSource.NickNameListResponse
+import org.sopt.at.domain.dataSource.SignInRequest
+import org.sopt.at.domain.dataSource.SignInResponse
+import org.sopt.at.domain.dataSource.SignUpRequest
+import org.sopt.at.domain.dataSource.SignUpResponse
 import retrofit2.Response
 import retrofit2.http.Body
 import retrofit2.http.GET

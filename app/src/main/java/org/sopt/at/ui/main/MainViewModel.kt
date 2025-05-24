@@ -1,18 +1,15 @@
 package org.sopt.at.ui.main
 
-import androidx.compose.ui.res.stringResource
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.asSharedFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
 import org.sopt.at.R
-import org.sopt.at.data.HomeCategoryData
-import org.sopt.at.data.KeywordData
-import org.sopt.at.data.VideoData
+import org.sopt.at.domain.dataSource.HomeCategoryData
+import org.sopt.at.domain.dataSource.KeywordData
+import org.sopt.at.domain.dataSource.VideoData
 import org.sopt.at.di.ServicePool
 import org.sopt.at.util.MyApplication.Companion.USER_ID
 import org.sopt.at.util.MyApplication.Companion.prefs
