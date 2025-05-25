@@ -12,13 +12,9 @@ class MyApplication : Application() {
     companion object {
         lateinit var prefs: PreferenceUtil
 
-        // intent or bundle key
-        const val ID_KEY = "ID"
-        const val PW_KEY = "PW"
-
-        // prefs key
-        const val PREFS_ID_KEY = "ID"
-        const val PREFS_PW_KEY = "PW"
+        const val USER_ID = "userId"
+        const val LOGIN_ID = "loginId"
+        const val PASSWORD = "password"
     }
 
     override fun onCreate() {

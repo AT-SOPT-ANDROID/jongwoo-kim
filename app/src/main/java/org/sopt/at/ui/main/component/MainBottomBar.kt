@@ -24,7 +24,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import org.sopt.at.R
-import org.sopt.at.data.BottomBarData
+import org.sopt.at.domain.dataSource.BottomBarData
 import org.sopt.at.util.noRippleClickable
 import org.sopt.at.util.type.MainNaviType
 

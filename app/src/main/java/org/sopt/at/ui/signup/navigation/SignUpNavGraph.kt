@@ -8,6 +8,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import org.sopt.at.ui.signup.screen.SignUpAccountState
 import org.sopt.at.ui.signup.screen.SignUpIdScreen
+import org.sopt.at.ui.signup.screen.SignUpNicknameScreen
 import org.sopt.at.ui.signup.screen.SignUpPwScreen
 
 @Composable
@@ -25,6 +26,16 @@ fun SignupNavGraph(
             popExitTransition = { slideOutHorizontally(targetOffsetX = { it }) }
         ) {
             SignUpIdScreen(navController, signUpAccountState)
+        }
+
+        composable(
+            route = SignUpScreenRoute.SignUpNicknameScreen.route,
+            enterTransition = { slideInHorizontally(initialOffsetX = { it }) },
+            exitTransition = { slideOutHorizontally(targetOffsetX = { -it }) },
+            popEnterTransition = { slideInHorizontally(initialOffsetX = { -it }) },
+            popExitTransition = { slideOutHorizontally(targetOffsetX = { it }) }
+        ) {
+            SignUpNicknameScreen(navController, signUpAccountState)
         }
 
         composable(

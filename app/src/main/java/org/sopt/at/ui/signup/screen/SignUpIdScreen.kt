@@ -107,7 +107,7 @@ fun SignUpIdScreen(
         Button(
             onClick = {
                 if(isIdValid(signUpAccountState.id)) {
-                    navController.navigate(SignUpScreenRoute.SignUpPwScreen.route)
+                    navController.navigate(SignUpScreenRoute.SignUpNicknameScreen.route)
                 }
                 else Toast.makeText(context, context.resources.getString(R.string.toast_signup_id_fail), Toast.LENGTH_SHORT).show()
             },
@@ -138,6 +138,6 @@ fun SignUpIdScreen(
 }
 
 fun isIdValid(input: String): Boolean {
-    val regex = "^[a-zA-Z0-9]{6,12}$".toRegex()
+    val regex = "^[a-zA-Z0-9]{8,20}$".toRegex()
     return regex.matches(input)
 }

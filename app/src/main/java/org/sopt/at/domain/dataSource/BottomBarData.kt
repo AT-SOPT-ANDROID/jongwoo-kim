@@ -1,4 +1,4 @@
-package org.sopt.at.data
+package org.sopt.at.domain.dataSource
 
 import org.sopt.at.util.type.MainNaviType
 
